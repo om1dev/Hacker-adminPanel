@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hack Sequence Admin</title>
+    <link rel="stylesheet" href="/admin/style.css" />
+  </head>
+  <body>
+    <main class="admin-shell">
+      <h1>Control Panel</h1>
+      <p class="subtitle">Remote synchronized trigger</p>
+
+      <section class="status-grid">
+        <article class="card">
+          <h2>Connected Clients</h2>
+          <p id="clientCount" class="metric">0</p>
+        </article>
+        <article class="card">
+          <h2>Current Phase</h2>
+          <p id="phase" class="metric">idle</p>
+        </article>
+      </section>
+
+      <section class="actions">
+        <button id="startBtn" class="btn btn-start">Start Hack Sequence</button>
+        <button id="resetBtn" class="btn btn-reset">Reset</button>
+      </section>
+
+      <p id="nextStart" class="hint">Waiting for command...</p>
+    </main>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/admin/script.js"></script>
+  </body>
+</html>
