@@ -3,31 +3,65 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hack Sequence Admin</title>
+    <title>HACK.SYS — Admin Control</title>
     <link rel="stylesheet" href="/admin/style.css" />
   </head>
   <body>
+
     <main class="admin-shell">
-      <h1>Control Panel</h1>
-      <p class="subtitle">Remote synchronized trigger</p>
 
-      <section class="status-grid">
-        <article class="card">
-          <h2>Connected Clients</h2>
-          <p id="clientCount" class="metric">0</p>
+      <!-- ── Header ── -->
+      <header class="admin-header">
+        <div class="header-left">
+          <div class="system-badge">
+            <span class="badge-dot"></span>
+            HACK.SYS &nbsp;//&nbsp; ROOT CONSOLE v2.0
+          </div>
+          <h1>CONTROL PANEL</h1>
+          <p class="subtitle">Remote synchronized breach trigger</p>
+        </div>
+        <div class="conn-status">
+          <span class="conn-label">Socket Link</span>
+          <div class="conn-pill">
+            <span class="dot"></span>
+            CONNECTED
+          </div>
+        </div>
+      </header>
+
+      <!-- ── Stats row ── -->
+      <section class="status-grid" aria-label="System status">
+        <article class="stat-card">
+          <p class="stat-label">Connected Clients</p>
+          <p id="clientCount" class="stat-value">0</p>
         </article>
-        <article class="card">
-          <h2>Current Phase</h2>
-          <p id="phase" class="metric">idle</p>
+        <article class="stat-card" id="phaseCard">
+          <p class="stat-label">Current Phase</p>
+          <p id="phase" class="stat-value">IDLE</p>
         </article>
       </section>
 
-      <section class="actions">
-        <button id="startBtn" class="btn btn-start">Start Hack Sequence</button>
-        <button id="resetBtn" class="btn btn-reset">Reset</button>
+      <div class="divider"></div>
+
+      <!-- ── Actions ── -->
+      <p class="section-title">// SEQUENCE CONTROLS</p>
+      <section class="actions" aria-label="Sequence controls">
+        <button id="startBtn" class="btn btn-start">⚡ Launch Hack Sequence</button>
+        <button id="resetBtn" class="btn btn-reset">⟳ Reset All Clients</button>
       </section>
 
-      <p id="nextStart" class="hint">Waiting for command...</p>
+      <!-- ── Status hint ── -->
+      <div class="hint-bar">
+        <span class="prompt">&gt;_</span>
+        <span id="nextStart">Awaiting command input...</span>
+      </div>
+
+      <!-- ── Footer ── -->
+      <footer class="admin-footer">
+        <span>HACK.SYS ADMIN &copy; 2025</span>
+        <span>UNAUTHORIZED ACCESS WILL BE PROSECUTED</span>
+      </footer>
+
     </main>
 
     <script src="/socket.io/socket.io.js"></script>
