@@ -3,34 +3,103 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hack Sequence Admin</title>
+    <title>⚡ Hack Sequence — Admin Control</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/admin/style.css" />
   </head>
   <body>
+    <!-- Animated background grid -->
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="bg-glow" aria-hidden="true"></div>
+
     <main class="admin-shell">
-      <h1>Control Panel</h1>
-      <p class="subtitle">Remote synchronized trigger</p>
 
-      <section class="status-grid">
-        <article class="card">
-          <h2>Connected Clients</h2>
-          <p id="clientCount" class="metric">0</p>
+      <!-- Header -->
+      <header class="admin-header">
+        <div class="logo-block">
+          <span class="logo-icon">⚡</span>
+          <div class="logo-text">
+            <span class="logo-title">HACK<span class="accent">SYS</span></span>
+            <span class="logo-sub">CONTROL TERMINAL v2.0<span class="cursor-blink">_</span></span>
+          </div>
+        </div>
+        <div class="connection-indicator" id="connectionIndicator">
+          <span class="conn-dot" id="connDot"></span>
+          <span class="conn-label" id="connLabel">CONNECTING…</span>
+        </div>
+      </header>
+
+      <!-- Status Cards -->
+      <section class="status-grid" aria-label="System Status">
+        <article class="card card-clients">
+          <div class="card-icon">🖥</div>
+          <div class="card-info">
+            <h2 class="card-label">Connected Clients</h2>
+            <p id="clientCount" class="metric metric-green">0</p>
+          </div>
         </article>
-        <article class="card">
-          <h2>Current Phase</h2>
-          <p id="phase" class="metric">idle</p>
+
+        <article class="card card-phase">
+          <div class="card-icon">📡</div>
+          <div class="card-info">
+            <h2 class="card-label">Current Phase</h2>
+            <div class="phase-row">
+              <span id="phaseBadge" class="phase-badge phase-idle">IDLE</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card card-timer">
+          <div class="card-icon">⏱</div>
+          <div class="card-info">
+            <h2 class="card-label">Time Remaining</h2>
+            <p id="adminCountdown" class="metric metric-amber">—</p>
+          </div>
         </article>
       </section>
 
-      <section class="actions">
-        <button id="startBtn" class="btn btn-start">Start Hack Sequence</button>
-        <button id="resetBtn" class="btn btn-reset">Reset</button>
+      <!-- Status message -->
+      <p id="nextStart" class="status-msg">
+        <span class="status-prefix">›</span>
+        <span id="statusText">Awaiting command…</span>
+      </p>
+
+      <!-- Action Buttons -->
+      <section class="actions" aria-label="Sequence Controls">
+        <button id="startBtn" class="btn btn-start" aria-label="Start hack sequence">
+          <span class="btn-icon">▶</span>
+          <span class="btn-label">START SEQUENCE</span>
+          <span class="btn-glow"></span>
+        </button>
+        <button id="resetBtn" class="btn btn-reset" aria-label="Reset sequence">
+          <span class="btn-icon">↺</span>
+          <span class="btn-label">RESET</span>
+        </button>
       </section>
 
-      <p id="nextStart" class="hint">Waiting for command...</p>
+      <!-- Activity Log -->
+      <section class="log-section" aria-label="Activity Log">
+        <div class="log-header">
+          <span class="log-title">ACTIVITY LOG</span>
+          <span class="log-live"><span class="live-dot"></span>LIVE</span>
+        </div>
+        <div class="log-body" id="activityLog" role="log" aria-live="polite" aria-label="Activity log">
+          <div class="log-entry log-entry--system">
+            <span class="log-ts" id="initTs"></span>
+            <span class="log-msg">Admin terminal initialised. Awaiting socket connection…</span>
+          </div>
+        </div>
+      </section>
+
     </main>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="/admin/script.js"></script>
+    <script>
+      // Stamp initialisation time
+      document.getElementById("initTs").textContent = new Date().toLocaleTimeString("en-GB", {hour:"2-digit",minute:"2-digit",second:"2-digit"});
+    </script>
   </body>
 </html>
